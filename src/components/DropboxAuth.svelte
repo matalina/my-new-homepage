@@ -2,8 +2,15 @@
 
 $: if(window.location.hash) {
   if(window.location.hash.includes('#access_token=')) {
-    const access_token = window.location.hash.replace('#access_token=','');
-    localStorage.access_token = access_token;
+    const hash = window.location.hash.replace('#','');
+    const parts = hash.split('&');
+    console.log(parts);
+    for(const i in parts) {
+      let pair = parts[i];
+      const row = pair.split('=');
+      localStorage[row[0]] = row[1];
+    }
+    
     window.location.replace('/');
   }
 }
